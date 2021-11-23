@@ -12,15 +12,21 @@ def index():
 def add_project():
     if request.form:
         capture = request.form['date']
-        date_verified = validate_date(capture)
-        new_project = Projects(title=request.form['title'], date=date_verified,
-        description=request.form['description'], skills = request.form['skills-list'],               
-        url = request.form['url'])
+        confirmed = validate_date(capture)
+        new_project = Projects(title=request.form['title'], date=confirmed,
+        description=request.form['desc'], skills = request.form['skills'],               
+        url = request.form['github'])
         db.session.add(new_project)
         db.session.commit()
         return redirect(url_for('index'))
     else:
         return render_template('projectform.html')
+
+@app.route('/proejct/<id>')
+def project(id):
+    show_projects = Projects.query.get_or_404(id)
+    return render_template('index.html', show_projects=show_projects)
+
 
 def validate_date(capture):
     try:
@@ -29,9 +35,7 @@ def validate_date(capture):
     except ValueError:
         print("uh oh")
         
-
-
-
+        
 if __name__ == '__main__':
     db.create_all()
     app.run(debug=True, port=8000, host="127.0.0.2")

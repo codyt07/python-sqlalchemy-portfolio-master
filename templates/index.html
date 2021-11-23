@@ -1,9 +1,8 @@
 
     {% extends 'layout.html' %}
     {% block content %}
-
-
-        <section class="header">
+    
+    <section class="header">
             <h1>Python Developer, Lifelong Learner, Curious of the World</h1>
             <p>I see programming as an art of an engineer-minded person. Through programming, you have a blank slate to begin. 
             You have the final masterpiece in mind, but to get there, you have to create. Sometimes an artist will draw a flower they want to include in the painting many times on the side. They do so to create the flower they want to add. 
@@ -41,66 +40,20 @@
             <i class="fas fa-file-code"></i>
             <h2>Projects</h2>
             <div id="project-list">
+                
+                {% for content in project %}
                 <div id="project1" class="a-project">
-                    <h3>Project Title</h3>
-                    <a href="#" class="github-btn">
+                    <h3>{{ content.title }}</h3>
+                    <a href="{{ content.url}}" class="github-btn">
                         <i class="fab fa-github"></i>
                         View on GitHub
                     </a>
-                    <p>
-                        Pastry wafer chocolate cake caramels. 
-                        Gummi bears pudding sugar plum macaroon. 
-                    </p>
-                    <p>
-                        Skills: Pastry wafer chocolate cake caramels. 
-                        Gummi bears pudding sugar plum macaroon. 
-                    </p>
+                    <p>{{ content.description }}</p>
+                    <p>Date Completed: {{ content.date }} </br>
+                    Skills: {{ content.skills }}</p>
                 </div>
-                <div id="project2" class="a-project">
-                    <h3>Project Title</h3>
-                    <a href="#" class="github-btn">
-                        <i class="fab fa-github"></i>
-                        View on GitHub
-                    </a>
-                    <p>
-                        Pastry wafer chocolate cake caramels. 
-                        Gummi bears pudding sugar plum macaroon. 
-                    </p>
-                    <p>
-                        Skills: Pastry wafer chocolate cake caramels. 
-                        Gummi bears pudding sugar plum macaroon. 
-                    </p>
-                </div>
-                <div id="project3" class="a-project">
-                    <h3>Project Title</h3>
-                    <a href="#" class="github-btn">
-                        <i class="fab fa-github"></i>
-                        View on GitHub
-                    </a>
-                    <p>
-                        Pastry wafer chocolate cake caramels. 
-                        Gummi bears pudding sugar plum macaroon. 
-                    </p>
-                    <p>
-                        Skills: Pastry wafer chocolate cake caramels. 
-                        Gummi bears pudding sugar plum macaroon. 
-                    </p>
-                </div>
-                <div id="project4" class="a-project">
-                    <h3>Project Title</h3>
-                    <a href="#" class="github-btn">
-                        <i class="fab fa-github"></i>
-                        View on GitHub
-                    </a>
-                    <p>
-                        Pastry wafer chocolate cake caramels. 
-                        Gummi bears pudding sugar plum macaroon. 
-                    </p>
-                    <p>
-                        Skills: Pastry wafer chocolate cake caramels. 
-                        Gummi bears pudding sugar plum macaroon. 
-                    </p>
-                </div>
+                {% endfor %}
+                
             </div>
             <div id="triangle4"></div>
         </section>

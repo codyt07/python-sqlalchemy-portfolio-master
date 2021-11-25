@@ -26,8 +26,9 @@
         </p>
         <div id="triangle6"></div>
     </section>
+    <form action="{{ url_for('edit_project') }}" method="POST">
     <section id="edit-delete">
-        <a href="#">
+        <a href="{{ url_for('edit_project', id = detail.id) }}">
             <i class="fas fa-edit"></i>
             Edit
         </a>
@@ -36,6 +37,7 @@
             Delete
         </a>
     </section>
+    </form>
     <section class="footer">
         <div class="socials">
             <!--Delete any you don't use-->

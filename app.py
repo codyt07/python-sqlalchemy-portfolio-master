@@ -32,6 +32,16 @@ def add_project():
     else:
         return render_template('projectform.html')
 
+@app.route('/edit_project', methods = ['GET', 'POST'])
+def edit_project():
+    id = request.args.get('id')
+    edit = Projects.query.get_or_404(id)
+    if request.form:
+        edit.title = request.form['title']
+    
+    return render_template('edit.html', edit=edit)
+
+
 def validate_date(capture):
     try:
             product_date_obj = datetime.strptime(capture, '%m-%d-%Y')

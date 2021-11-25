@@ -3,10 +3,20 @@ from flask import(render_template, redirect,
 from models import db, Projects, app
 from datetime import datetime
 
-@app.route('/')
+@app.route('/', methods = ['GET', 'POST'])
 def index():
+    if request.form:
+        pass
     project = Projects.query.all()
     return render_template('index.html', project=project)
+
+@app.route('/project<id>', methods = ['GET', 'POST'])
+def project_detail(id):
+    detail = Projects.query.get_or_404(id)
+    skill = Projects.query.get_or_404(id).skills
+    view = skill.split(", ")
+    return render_template('detail.html', detail=detail, view=view)
+
 
 @app.route('/add_project', methods = ['GET', 'POST'])
 def add_project():
@@ -21,12 +31,6 @@ def add_project():
         return redirect(url_for('index'))
     else:
         return render_template('projectform.html')
-
-@app.route('/proejct/<id>')
-def project(id):
-    show_projects = Projects.query.get_or_404(id)
-    return render_template('index.html', show_projects=show_projects)
-
 
 def validate_date(capture):
     try:

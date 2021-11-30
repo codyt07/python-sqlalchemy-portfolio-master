@@ -33,6 +33,16 @@ def new():
 @app.route('/project/<id>/edit', methods = ['GET', 'POST'])
 def edit(id):
     edit = Projects.query.get_or_404(id)
+    if request.form:
+        capture = request.form['date']
+        sql_happy = datetime.strptime(capture, '%Y-%m')
+        edit.title = request.form['title']
+        edit.date = sql_happy
+        edit.description = request.form['desc']
+        edit.skills = request.form['skills']
+        edit.url = request.form['github']
+        db.session.commit()
+        return redirect(url_for('index'))
     return render_template('edit.html', edit=edit)
 
 @app.route('/project/<id>/delete', methods=['GET', 'POST'])

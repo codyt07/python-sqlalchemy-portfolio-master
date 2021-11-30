@@ -4,7 +4,7 @@
         <h1>Edit Project</h1>
     </section>
     <section id="form">
-        <form action="{{ url_for('new') }}" method = "POST">
+        <form action="{{ url_for('edit', id=edit.id) }}" method = "POST">
             <label for="title">Project Title</label>
             <input type="text" name="title" id="title" placeholder="Project Name" value="{{edit.title}}" required>
             <label for="date">Completion Date</label>

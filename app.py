@@ -34,8 +34,8 @@ def new():
 def edit(id):
     edit = Projects.query.get_or_404(id)
     if request.form:
-        capture = request.form['date']
-        sql_happy = datetime.strptime(capture, '%Y-%m')
+        capture_edit = request.form['date']
+        sql_happy = datetime.strptime(capture_edit, '%Y-%m')
         edit.title = request.form['title']
         edit.date = sql_happy
         edit.description = request.form['desc']
@@ -55,6 +55,10 @@ def delete(id):
 @app.route('/about')
 def about():
     return render_template('about.html')
+
+@app.errorhandler(404)
+def not_found(error):
+    return render_template('404.html', msg=error), 404
 
 if __name__ == '__main__':
     db.create_all()

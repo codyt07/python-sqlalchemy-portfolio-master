@@ -3,10 +3,12 @@ from flask import(render_template, redirect,
 from models import db, Projects, app
 from datetime import datetime
 
+
 @app.route('/')
 def index():
     project = Projects.query.all()
     return render_template('index.html', project=project)
+
 
 @app.route('/project/<id>', methods = ['GET', 'POST'])
 def project_detail(id):
@@ -30,6 +32,7 @@ def new():
     else:
         return render_template('projectform.html')
 
+
 @app.route('/project/<id>/edit', methods = ['GET', 'POST'])
 def edit(id):
     edit = Projects.query.get_or_404(id)
@@ -45,6 +48,7 @@ def edit(id):
         return redirect(url_for('index'))
     return render_template('edit.html', edit=edit)
 
+
 @app.route('/project/<id>/delete', methods=['GET', 'POST'])
 def delete(id):
     delete = Projects.query.get_or_404(id)
@@ -56,9 +60,11 @@ def delete(id):
 def about():
     return render_template('about.html')
 
+
 @app.errorhandler(404)
 def not_found(error):
     return render_template('404.html', msg=error), 404
+
 
 if __name__ == '__main__':
     db.create_all()
